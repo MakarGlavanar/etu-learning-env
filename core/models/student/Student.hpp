@@ -8,6 +8,7 @@ class Student
 private:
   std::string id;
   std::string fio;
+  int mark;
   int groupId;
   int index;
 
@@ -23,6 +24,10 @@ public:
   std::string getId();
 
   std::string getFio();
+
+  int getMark();
+
+  void setMark(int value);
 
   int getGroupId();
 

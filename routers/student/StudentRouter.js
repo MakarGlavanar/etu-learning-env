@@ -8,7 +8,8 @@ function StudentRouter() {
   core.readStudents();
   
   router.get('/students', (req, res) => {
-    const students = core.getStudents();
+    const markAsNumber = Number(req.query.mark);
+    const students = Number.isNaN(markAsNumber) ? core.getStudents() : core.getStudents(markAsNumber);
 
     res.json(makeResponse('ok', students)).send();
   });

@@ -20,6 +20,16 @@ std::string Student::getFio()
   return fio;
 }
 
+int Student::getMark() {
+  return mark;
+}
+
+void Student::setMark(int value) {
+  if (value <= 200 && value >= 0) {
+    mark = value;
+  }
+}
+
 int Student::getGroupId()
 {
   return groupId;

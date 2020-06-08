@@ -36,8 +36,23 @@ void readStudents(const CallbackInfo &info)
 Array getStudents(const CallbackInfo &info)
 {
   Env env = info.Env();
-  const int STUDENTS_COUNT = service.getStudentsCount();
-  Student *students = service.getStudents();
+  int STUDENTS_COUNT = service.getStudentsCount();
+  bool hasMarkFilter = info.Length() > 0;
+  Student *students;
+
+  if (hasMarkFilter) {
+    int mark = info[0].As<Number>().Int32Value();
+
+    students = service.getStudents(mark, &STUDENTS_COUNT);
+  } else {
+    students = service.getStudents();
+  }
+
+  if (students == NULL) {
+    Array arr = Array::New(env);
+
+    return arr;
+  }
 
   Array arr = Array::New(env, STUDENTS_COUNT);
 
