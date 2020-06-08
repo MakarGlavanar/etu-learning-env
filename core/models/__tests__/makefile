@@ -1,5 +1,5 @@
-test:
-	cd ../test/__tests__/ && make
+task:
+	cd ../task/__tests__/ && make
 
 main:
-	make test
+	make task

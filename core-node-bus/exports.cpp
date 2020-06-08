@@ -1,10 +1,11 @@
 #include <napi.h>
-#include "./test/makeTest.hpp"
+
+#include "./test/TestDecorator.hpp"
 
 using namespace Napi;
 
 Object init(Env env, Object exports) {
-    exports.Set(String::New(env, "makeTest"), Function::New(env, makeTest));
+    exports.Set(String::New(env, "generateTest"), Function::New(env, generateTest));
 
     return exports;
 };

@@ -8,10 +8,12 @@
       ],
       "target_name": "etu_le_core",
       "sources": [
-        "core/models/test/test.hpp",
-        "core/models/test/test.cpp",
-        "core-node-bus/test/makeTest.hpp",
-        "core-node-bus/test/makeTest.cpp",
+        "core/models/task/Task.cpp",
+        "core/models/test/Test.cpp",
+        "core/services/task/TaskService.cpp",
+        "core/services/test/TestService.cpp",
+        "core-node-bus/task/TaskDecorator.cpp",
+        "core-node-bus/test/TestDecorator.cpp",
         "core-node-bus/exports.cpp"
       ],
       'defines': [ 'NAPI_DISABLE_CPP_EXCEPTIONS' ]

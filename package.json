@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "build::bus": "npm i",
-    "test::core::models": "cd core/models/__tests__/ && make"
+    "test::core::models": "cd core/models/__tests__/ && make main",
+    "test::core::services": "cd core/services/__tests__/ && make main"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,9 @@
   "homepage": "https://github.com/MakarGlavanar/etu-learning-env#readme",
   "dependencies": {
     "bindings": "^1.5.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "node-addon-api": "^3.0.0"
   }
 }
