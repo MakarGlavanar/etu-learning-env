@@ -10,6 +10,7 @@ Object init(Env env, Object exports) {
     exports.Set(String::New(env, "generateTest"), Function::New(env, generateTest));
 
     // STUDENTS
+    exports.Set(String::New(env, "createStudent"), Function::New(env, createStudent));
     exports.Set(String::New(env, "getStudents"), Function::New(env, getStudents));
     exports.Set(String::New(env, "readStudents"), Function::New(env, readStudents));
 

@@ -1,3 +1,4 @@
+#include <string>
 #include "napi.h"
 
 #include "../../core/models/student/Student.hpp"
@@ -9,6 +10,8 @@
 using namespace Napi;
 
 Object decorateStudent(Env env, Student student);
+
+Object createStudent(const CallbackInfo& info);
 
 void readStudents(const CallbackInfo& info);
 

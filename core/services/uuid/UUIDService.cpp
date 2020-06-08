@@ -2,8 +2,6 @@
 
 #include "UUIDService.hpp"
 
-using namespace UUID;
-
 unsigned int random_char()
 {
   std::random_device rd;
