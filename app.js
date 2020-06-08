@@ -15,5 +15,6 @@ app.use("/", testRouter());
 const port = process.env.PORT;
 
 app.listen(port, () => {
+  console.log(core.kek());
   console.log(`Server is listening on port ${port}...`);
 });
