@@ -9,10 +9,10 @@ StudentService::StudentService(std::string inputFileName, std::string outputFile
 
 Student StudentService::makeStudent(std::string fio, int groupId, int index)
 {
-  std::string id = UUID::uuid();
+  std::string id = uuid();
   Student student(id, fio, groupId, index);
 
-  list.push_front(student);
+  list.push_back(student);
 
   return student;
 }
