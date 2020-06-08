@@ -11,8 +11,12 @@
 class StudentService {
   private:
     std::list<Student> list;
+    std::string inputFileName;
+    std::string outputFileName;
     std::ifstream input;
     std::ofstream output;
+
+    void writeStudents();
   
   public:
     StudentService(std::string inputFileName, std::string outputFileName);
@@ -26,6 +30,8 @@ class StudentService {
     int getStudentsCount();
 
     void deleteStudent(std::string id);
+
+    ~StudentService();
 };
 
 #endif

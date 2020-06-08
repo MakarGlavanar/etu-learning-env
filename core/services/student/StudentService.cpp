@@ -2,10 +2,10 @@
 #include "../uuid/UUIDService.hpp"
 #include <iostream>
 
-StudentService::StudentService(std::string inputFileName, std::string outputFileName)
-{
-  input.open(inputFileName.c_str());
-}
+StudentService::StudentService(
+    std::string inputFileName,
+    std::string outputFileName) : inputFileName(inputFileName),
+                                  outputFileName(outputFileName){};
 
 Student StudentService::makeStudent(std::string fio, int groupId, int index)
 {
@@ -14,11 +14,15 @@ Student StudentService::makeStudent(std::string fio, int groupId, int index)
 
   list.push_back(student);
 
+  writeStudents();
+
   return student;
 }
 
 void StudentService::readStudents()
 {
+  input.open(inputFileName.c_str());
+  
   bool wasStudentDataStarted = false;
   int dataIndex = 0;
   std::string line;
@@ -77,6 +81,8 @@ void StudentService::readStudents()
       dataIndex += 1;
     }
   }
+
+  input.close();
 }
 
 Student *StudentService::getStudents()
@@ -111,4 +117,23 @@ void StudentService::deleteStudent(std::string id)
   }
 
   // list.remove(searchingStudent);
+}
+
+void StudentService::writeStudents() {
+  output.open(outputFileName.c_str());
+
+  for (Student stud : list)
+  {
+    output << stud.getId() << "\n";
+    output << stud.getFio() << "\n";
+    output << stud.getGroupId() << "\n";
+    output << stud.getIndex() << "\n";
+    output << "\n";
+  }
+
+  output.close();
+}
+
+StudentService::~StudentService() {
+  list.clear();
 }
