@@ -19,7 +19,7 @@ class StudentService {
 
     Student makeStudent(std::string fio, int groupId, int index);
 
-    std::string readStudents();
+    void readStudents();
 
     Student* getStudents();
 

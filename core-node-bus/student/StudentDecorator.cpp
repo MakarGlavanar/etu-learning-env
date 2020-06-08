@@ -1,10 +1,40 @@
 #include "StudentDecorator.hpp"
 
-String kek(const CallbackInfo &info)
+StudentService service("./students.txt", "./students.txt");
+
+Object decorateStudent(Env env, Student student)
 {
-  StudentService service("./students.txt", "./students.txt");
+  Object obj = Object::New(env);
 
-  String lol = String::New(info.Env(), service.readStudents());
+  obj.Set("id", student.getId());
+  obj.Set("fio", student.getFio());
+  obj.Set("groupId", student.getGroupId());
+  obj.Set("index", student.getIndex());
 
-  return lol;
+  return obj;
+}
+
+void readStudents(const CallbackInfo &info)
+{
+  service.readStudents();
+}
+
+Array getStudents(const CallbackInfo &info)
+{
+  Env env = info.Env();
+  const int STUDENTS_COUNT = service.getStudentsCount();
+  Student *students = service.getStudents();
+
+  Array arr = Array::New(env, STUDENTS_COUNT);
+
+  for (int i = 0; i < STUDENTS_COUNT; i++)
+  {
+    Student student = students[i];
+
+    Object obj = decorateStudent(env, student);
+
+    arr[i] = obj;
+  }
+
+  return arr;
 }

@@ -6,8 +6,12 @@
 using namespace Napi;
 
 Object init(Env env, Object exports) {
+    // TEST
     exports.Set(String::New(env, "generateTest"), Function::New(env, generateTest));
-    exports.Set(String::New(env, "kek"), Function::New(env, kek));
+
+    // STUDENTS
+    exports.Set(String::New(env, "getStudents"), Function::New(env, getStudents));
+    exports.Set(String::New(env, "readStudents"), Function::New(env, readStudents));
 
     return exports;
 };

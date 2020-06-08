@@ -9,12 +9,13 @@ const app = express();
 app.use(bodyParser.json());
 
 const testRouter = require('./routers/test/TestRouter');
+const studentRouter = require('./routers/student/StudentRouter');
 
 app.use("/", testRouter());
+app.use("/", studentRouter());
 
 const port = process.env.PORT;
 
 app.listen(port, () => {
-  console.log(core.kek());
   console.log(`Server is listening on port ${port}...`);
 });

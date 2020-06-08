@@ -11,6 +11,10 @@ Student::Student(
                  groupId(groupId),
                  index(index){};
 
+std::string Student::getId() {
+  return id;
+}
+
 std::string Student::getFio()
 {
   return fio;

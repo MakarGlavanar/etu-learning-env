@@ -5,7 +5,6 @@
 StudentService::StudentService(std::string inputFileName, std::string outputFileName)
 {
   input.open(inputFileName.c_str());
-  output.open(outputFileName.c_str());
 }
 
 Student StudentService::makeStudent(std::string fio, int groupId, int index)
@@ -13,22 +12,71 @@ Student StudentService::makeStudent(std::string fio, int groupId, int index)
   std::string id = UUID::uuid();
   Student student(id, fio, groupId, index);
 
-  // list.push_front(student);
+  list.push_front(student);
 
   return student;
 }
 
-std::string StudentService::readStudents()
+void StudentService::readStudents()
 {
-  std::string result = "";
+  bool wasStudentDataStarted = false;
+  int dataIndex = 0;
   std::string line;
+  std::string id;
+  std::string fio;
+  int groupId;
+  int index;
 
-  while (std::getline(input, line))
+  for (std::string line; getline(input, line, '\n');)
   {
-    result += line + "*___*";
-  }
+    if (line != "")
+    {
+      if (!wasStudentDataStarted)
+      {
+        wasStudentDataStarted = true;
+        dataIndex = 0;
+      }
+    }
+    else
+    {
+      if (wasStudentDataStarted)
+      {
+        Student student(id, fio, groupId, index);
 
-  return result;
+        list.push_back(student);
+      }
+
+      dataIndex = 0;
+      wasStudentDataStarted = false;
+    }
+
+    if (wasStudentDataStarted)
+    {
+      switch (dataIndex)
+      {
+      case 0:
+        id = line;
+        break;
+
+      case 1:
+        fio = line;
+        break;
+
+      case 2:
+        groupId = std::stoi(line);
+        break;
+
+      case 3:
+        index = std::stoi(line);
+        break;
+
+      default:
+        break;
+      }
+
+      dataIndex += 1;
+    }
+  }
 }
 
 Student *StudentService::getStudents()
@@ -39,21 +87,25 @@ Student *StudentService::getStudents()
 
   for (Student stud : list)
   {
-    students[i] = stud;
+    students[i++] = stud;
   }
 
   return students;
 }
 
-int StudentService::getStudentsCount() {
+int StudentService::getStudentsCount()
+{
   return list.size();
 }
 
-void StudentService::deleteStudent(std::string id) {
+void StudentService::deleteStudent(std::string id)
+{
   Student searchingStudent;
-  
-  for (Student stud : list) {
-    if (stud.getId() == id) {
+
+  for (Student stud : list)
+  {
+    if (stud.getId() == id)
+    {
       searchingStudent = stud;
     }
   }
